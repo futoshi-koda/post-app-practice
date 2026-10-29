@@ -1,0 +1,61 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="ページ-1" id="EyXxgwHsL-PntIT6zG9C">
+    <mxGraphModel dx="1217" dy="759" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="lMmHPYnvaKbREdFYF0yB-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="540" width="420" x="50" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="lMmHPYnvaKbREdFYF0yB-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="メニュー" vertex="1">
+          <mxGeometry height="30" width="120" x="90" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lMmHPYnvaKbREdFYF0yB-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="ドリンク" vertex="1">
+          <mxGeometry height="30" width="120" x="90" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="lMmHPYnvaKbREdFYF0yB-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="注文の状況を見る" vertex="1">
+          <mxGeometry height="30" width="120" x="300" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lMmHPYnvaKbREdFYF0yB-10" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="130" width="330" x="90" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="lMmHPYnvaKbREdFYF0yB-5" parent="lMmHPYnvaKbREdFYF0yB-10" style="rounded=0;whiteSpace=wrap;html=1;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;" value="" vertex="1">
+          <mxGeometry height="130" width="330" as="geometry" />
+        </mxCell>
+        <mxCell id="lMmHPYnvaKbREdFYF0yB-6" parent="lMmHPYnvaKbREdFYF0yB-10" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontStyle=1" value="ドリンク１　　　　　　　　　　　　価格" vertex="1">
+          <mxGeometry height="30" width="280" x="10" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="lMmHPYnvaKbREdFYF0yB-7" parent="lMmHPYnvaKbREdFYF0yB-10" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="説明文１" vertex="1">
+          <mxGeometry height="30" width="90" x="10" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lMmHPYnvaKbREdFYF0yB-8" parent="lMmHPYnvaKbREdFYF0yB-10" style="rounded=0;whiteSpace=wrap;html=1;" value="個数" vertex="1">
+          <mxGeometry height="40" width="60" x="20" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="lMmHPYnvaKbREdFYF0yB-9" parent="lMmHPYnvaKbREdFYF0yB-10" style="rounded=0;whiteSpace=wrap;html=1;" value="カートに入れる" vertex="1">
+          <mxGeometry height="40" width="140" x="160" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="lMmHPYnvaKbREdFYF0yB-11" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="130" width="330" x="90" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="lMmHPYnvaKbREdFYF0yB-12" parent="lMmHPYnvaKbREdFYF0yB-11" style="rounded=0;whiteSpace=wrap;html=1;labelPosition=center;verticalLabelPosition=middle;align=center;verticalAlign=middle;" value="" vertex="1">
+          <mxGeometry height="130" width="330" as="geometry" />
+        </mxCell>
+        <mxCell id="lMmHPYnvaKbREdFYF0yB-13" parent="lMmHPYnvaKbREdFYF0yB-11" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontStyle=1" value="ドリンク２（売り切れ）　　　　　価格" vertex="1">
+          <mxGeometry height="30" width="280" x="10" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="lMmHPYnvaKbREdFYF0yB-14" parent="lMmHPYnvaKbREdFYF0yB-11" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="説明文２" vertex="1">
+          <mxGeometry height="30" width="90" x="10" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lMmHPYnvaKbREdFYF0yB-15" parent="lMmHPYnvaKbREdFYF0yB-11" style="rounded=0;whiteSpace=wrap;html=1;" value="個数（非表示）" vertex="1">
+          <mxGeometry height="40" width="90" x="20" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="lMmHPYnvaKbREdFYF0yB-16" parent="lMmHPYnvaKbREdFYF0yB-11" style="rounded=0;whiteSpace=wrap;html=1;" value="カートに入れる（非表示）" vertex="1">
+          <mxGeometry height="40" width="140" x="160" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="lMmHPYnvaKbREdFYF0yB-17" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="以下同じ" vertex="1">
+          <mxGeometry height="30" width="60" x="230" y="480" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
