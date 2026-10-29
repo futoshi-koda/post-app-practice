@@ -1,0 +1,40 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="ページ-1" id="ylOE0q4lJGzyXhk2NhYP">
+    <mxGraphModel dx="1086" dy="717" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="AO30_o-6WzvxH85Rby3g-1" parent="1" style="whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="610" width="560" x="134" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="AO30_o-6WzvxH85Rby3g-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="投稿編集" vertex="1">
+          <mxGeometry height="50" width="120" x="200" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="AO30_o-6WzvxH85Rby3g-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="タイトル" vertex="1">
+          <mxGeometry height="50" width="120" x="200" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="AO30_o-6WzvxH85Rby3g-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="カテゴリ" vertex="1">
+          <mxGeometry height="50" width="120" x="200" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="AO30_o-6WzvxH85Rby3g-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="本文" vertex="1">
+          <mxGeometry height="50" width="120" x="200" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="AO30_o-6WzvxH85Rby3g-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="50" width="280" x="360" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="AO30_o-6WzvxH85Rby3g-8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="50" width="280" x="360" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="AO30_o-6WzvxH85Rby3g-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="210" width="280" x="360" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="AO30_o-6WzvxH85Rby3g-10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="更新" vertex="1">
+          <mxGeometry height="50" width="120" x="210" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="AO30_o-6WzvxH85Rby3g-11" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="キャンセル" vertex="1">
+          <mxGeometry height="50" width="160" x="420" y="560" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
