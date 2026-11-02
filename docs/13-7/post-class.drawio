@@ -1,0 +1,120 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="ページ-1" id="cbk8asvdoLjMoY_S8ON2">
+    <mxGraphModel dx="709" dy="443" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="BEAjMtKp3prSnHilxz_x-8" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="240" width="120" x="80" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-1" parent="BEAjMtKp3prSnHilxz_x-8" style="rounded=0;whiteSpace=wrap;html=1;" value="PostController" vertex="1">
+          <mxGeometry height="40" width="120" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-2" parent="BEAjMtKp3prSnHilxz_x-8" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="40" width="120" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-3" parent="BEAjMtKp3prSnHilxz_x-8" style="rounded=0;whiteSpace=wrap;html=1;" value="index()" vertex="1">
+          <mxGeometry height="40" width="120" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-4" parent="BEAjMtKp3prSnHilxz_x-8" style="rounded=0;whiteSpace=wrap;html=1;" value="edit()" vertex="1">
+          <mxGeometry height="40" width="120" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-5" parent="BEAjMtKp3prSnHilxz_x-8" style="rounded=0;whiteSpace=wrap;html=1;" value="update()" vertex="1">
+          <mxGeometry height="40" width="120" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-6" parent="BEAjMtKp3prSnHilxz_x-8" style="rounded=0;whiteSpace=wrap;html=1;" value="destroy()" vertex="1">
+          <mxGeometry height="40" width="120" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-16" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="200" width="120" x="320" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-10" parent="BEAjMtKp3prSnHilxz_x-16" style="rounded=0;whiteSpace=wrap;html=1;" value="Post" vertex="1">
+          <mxGeometry height="40" width="120" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-11" parent="BEAjMtKp3prSnHilxz_x-16" style="rounded=0;whiteSpace=wrap;html=1;" value="title" vertex="1">
+          <mxGeometry height="40" width="120" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-12" parent="BEAjMtKp3prSnHilxz_x-16" style="rounded=0;whiteSpace=wrap;html=1;" value="content" vertex="1">
+          <mxGeometry height="40" width="120" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-13" parent="BEAjMtKp3prSnHilxz_x-16" style="rounded=0;whiteSpace=wrap;html=1;" value="user()" vertex="1">
+          <mxGeometry height="40" width="120" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-14" parent="BEAjMtKp3prSnHilxz_x-16" style="rounded=0;whiteSpace=wrap;html=1;" value="category()" vertex="1">
+          <mxGeometry height="40" width="120" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-17" connectable="0" parent="1" style="group" value="" vertex="1">
+          <mxGeometry height="200" width="120" x="560" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-18" parent="BEAjMtKp3prSnHilxz_x-17" style="rounded=0;whiteSpace=wrap;html=1;" value="User" vertex="1">
+          <mxGeometry height="40" width="120" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-19" parent="BEAjMtKp3prSnHilxz_x-17" style="rounded=0;whiteSpace=wrap;html=1;" value="name" vertex="1">
+          <mxGeometry height="40" width="120" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-20" parent="BEAjMtKp3prSnHilxz_x-17" style="rounded=0;whiteSpace=wrap;html=1;" value="email" vertex="1">
+          <mxGeometry height="40" width="120" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-21" parent="BEAjMtKp3prSnHilxz_x-17" style="rounded=0;whiteSpace=wrap;html=1;" value="password" vertex="1">
+          <mxGeometry height="40" width="120" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-22" parent="BEAjMtKp3prSnHilxz_x-17" style="rounded=0;whiteSpace=wrap;html=1;" value="posts" vertex="1">
+          <mxGeometry height="40" width="120" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-24" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Category" vertex="1">
+          <mxGeometry height="40" width="120" x="320" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-25" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="name" vertex="1">
+          <mxGeometry height="40" width="120" x="320" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-26" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="posts" vertex="1">
+          <mxGeometry height="40" width="120" x="320" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-31" edge="1" parent="1" source="BEAjMtKp3prSnHilxz_x-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" target="BEAjMtKp3prSnHilxz_x-24" value="">
+          <mxGeometry relative="1" x="-0.75" as="geometry">
+            <mxPoint x="280" y="100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-36" connectable="0" parent="BEAjMtKp3prSnHilxz_x-31" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];inheritText=1;defaultLabelBackgroundColor=page;" value="使う" vertex="1">
+          <mxGeometry relative="1" x="0.1204" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-32" edge="1" parent="1" source="BEAjMtKp3prSnHilxz_x-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" target="BEAjMtKp3prSnHilxz_x-10">
+          <mxGeometry relative="1" x="-0.0667" as="geometry" />
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-35" connectable="0" parent="BEAjMtKp3prSnHilxz_x-32" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];inheritText=1;defaultLabelBackgroundColor=page;" value="使う" vertex="1">
+          <mxGeometry relative="1" x="0.0178" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-33" edge="1" parent="1" source="BEAjMtKp3prSnHilxz_x-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;exitX=1;exitY=0.25;exitDx=0;exitDy=0;endArrow=none;endFill=0;" target="BEAjMtKp3prSnHilxz_x-18">
+          <mxGeometry relative="1" x="0.0778" as="geometry">
+            <Array as="points">
+              <mxPoint x="530" y="50" />
+              <mxPoint x="530" y="110" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-38" connectable="0" parent="BEAjMtKp3prSnHilxz_x-33" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];inheritText=1;defaultLabelBackgroundColor=page;" value="一人のユーザーは、&lt;div&gt;複数の投稿を持つ&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="0.2111" y="2" as="geometry">
+            <mxPoint x="48" y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-34" edge="1" parent="1" source="BEAjMtKp3prSnHilxz_x-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;exitX=1;exitY=0.75;exitDx=0;exitDy=0;endArrow=none;endFill=0;" target="BEAjMtKp3prSnHilxz_x-24">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="500" y="70" />
+              <mxPoint x="500" y="300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="BEAjMtKp3prSnHilxz_x-37" connectable="0" parent="BEAjMtKp3prSnHilxz_x-34" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];inheritText=1;defaultLabelBackgroundColor=page;" value="一つのカテゴリには、&lt;div&gt;複数の投稿が入る&lt;/div&gt;" vertex="1">
+          <mxGeometry relative="1" x="0.1657" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
