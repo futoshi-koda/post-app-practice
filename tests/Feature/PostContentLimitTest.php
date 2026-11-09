@@ -74,6 +74,14 @@ class PostContentLimitTest extends TestCase
         );
     }
 
+    public function test_編集画面に残り字数が表示される(): void
+    {
+        $this->actingAs($this->user)
+            ->get(route('posts.edit', $this->post))
+            ->assertOk()
+            ->assertSee('残り 136 字'); // 「元の本文」は 4 字
+    }
+
     public function test_空の本文は日本語のエラーになる(): void
     {
         $this->update('')

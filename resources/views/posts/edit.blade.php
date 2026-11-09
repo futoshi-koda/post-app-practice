@@ -28,6 +28,8 @@
         .btn-secondary:hover { background: #F7F8F9; }
         .btn:focus-visible { outline: 2px solid #E8792B; outline-offset: 2px; }
         .error { color: #D6402C; font-size: 0.83rem; margin-top: 0.3rem; }
+        .counter { color: #5B6570; font-size: 0.8rem; text-align: right; margin-top: 0.3rem; }
+        .counter.over { color: #D6402C; font-weight: 700; }
     </style>
 </head>
 <body>
@@ -67,6 +69,8 @@
                 <div class="form-group">
                     <label for="content">本文</label>
                     <textarea id="content" name="content" required>{{ old('content', $post->content) }}</textarea>
+                    @php($remaining = 140 - mb_strlen(str_replace("\r\n", "\n", old('content', $post->content))))
+                    <p id="content-counter" class="counter @if ($remaining < 0) over @endif">{{ $remaining >= 0 ? "残り {$remaining} 字" : (-$remaining).' 字オーバー' }}</p>
                     @error('content')
                         <p class="error">{{ $message }}</p>
                     @enderror
@@ -79,5 +83,24 @@
             </form>
         </main>
     </div>
+
+    <script>
+        // 本文の残り字数（上限 140 字）。サーバ側の mb_strlen と同じく、改行は 1 字・絵文字も 1 字で数える
+        (function () {
+            var LIMIT = 140;
+            var textarea = document.getElementById('content');
+            var counter = document.getElementById('content-counter');
+
+            function update() {
+                var length = Array.from(textarea.value.replace(/\r\n/g, '\n')).length;
+                var remaining = LIMIT - length;
+                counter.textContent = remaining >= 0 ? '残り ' + remaining + ' 字' : (-remaining) + ' 字オーバー';
+                counter.classList.toggle('over', remaining < 0);
+            }
+
+            textarea.addEventListener('input', update);
+            update();
+        })();
+    </script>
 </body>
 </html>
