@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Concerns\ValidatesContent;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    use ValidatesContent;
+
     public function index()
     {
         $posts = Post::with(['user', 'category'])->latest()->get();
@@ -39,18 +42,9 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
 
-        // ブラウザは textarea の改行を \r\n で送るため、1 改行を 1 字として数えるよう \n に揃える
-        $request->merge([
-            'content' => str_replace("\r\n", "\n", (string) $request->input('content')),
-        ]);
-
-        $validated = $request->validate([
+        $validated = $this->validateContent($request, [
             'title' => 'required|string|max:255',
-            'content' => 'required|string|max:140',
             'category_id' => 'required|exists:categories,id',
-        ], [
-            'content.required' => '本文を入力してください。',
-            'content.max' => '本文は140字以内で入力してください。',
         ]);
 
         $post->update($validated);
