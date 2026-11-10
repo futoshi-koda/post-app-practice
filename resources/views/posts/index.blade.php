@@ -30,6 +30,7 @@
         .topic { margin-left: auto; border-radius: 999px; padding: 0.1rem 0.6rem; font-size: 0.7rem; font-weight: 700; }
         .post-title { font-weight: 700; font-size: 0.96rem; margin: 0.28rem 0 0.06rem; }
         .post-text { font-size: 0.94rem; line-height: 1.7; color: #0F1419; overflow-wrap: anywhere; }
+        .post-head a.time:hover, .post-text-link:hover .post-text { text-decoration: underline; text-underline-offset: 3px; }
         .post-actions { display: flex; gap: 1.2rem; margin-top: 0.5rem; }
         .post-actions a, .post-actions button { background: none; border: none; padding: 0; color: #5B6570; font-size: 0.8rem; font-weight: 600; cursor: pointer; font-family: inherit; }
         .post-actions a:hover { color: #0F1419; text-decoration: underline; text-underline-offset: 3px; }
@@ -96,11 +97,11 @@
                         <div class="post-body">
                             <div class="post-head">
                                 <span class="name">{{ $post->user->name }}</span>
-                                <span class="time">{{ $post->created_at->format('n月j日 H:i') }}</span>
+                                <a href="{{ route('posts.show', $post) }}" class="time">{{ $post->created_at->format('n月j日 H:i') }}</a>
                                 <span class="topic" style="background: {{ $tBg }}; color: {{ $tFg }};">{{ $post->category->name }}</span>
                             </div>
                             <p class="post-title">{{ $post->title }}</p>
-                            <p class="post-text">{{ $post->content }}</p>
+                            <a href="{{ route('posts.show', $post) }}" class="post-text-link"><p class="post-text">{{ $post->content }}</p></a>
                             @canany(['update', 'delete'], $post)
                                 <div class="post-actions">
                                     @can('update', $post)

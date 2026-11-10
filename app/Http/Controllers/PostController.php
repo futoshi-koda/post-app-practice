@@ -15,6 +15,17 @@ class PostController extends Controller
         return view('posts.index', compact('posts'));
     }
 
+    public function show(Post $post)
+    {
+        $post->load([
+            'user',
+            'category',
+            'replies' => fn ($query) => $query->with('user')->oldest()->orderBy('id'),
+        ]);
+
+        return view('posts.show', compact('post'));
+    }
+
     public function edit(Post $post)
     {
         $this->authorize('update', $post);
