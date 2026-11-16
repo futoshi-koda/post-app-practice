@@ -21,7 +21,10 @@
                     </form>
                 </div>
             </div>
-            <div class="page-title">ホーム</div>
+            <div class="page-title page-title-bar">
+                <span>ホーム</span>
+                <a href="{{ route('posts.create') }}" class="new-post-btn">ポストする</a>
+            </div>
         </header>
 
         <main class="feed">

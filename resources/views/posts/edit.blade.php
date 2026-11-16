@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ポストを編集 / つぶやき投稿アプリ</title>
+    <title>{{ $post->exists ? 'ポストを編集' : 'ポストを書く' }} / つぶやき投稿アプリ</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif; background: #FFFFFF; color: #0F1419; font-feature-settings: "palt"; }
@@ -38,13 +38,16 @@
             <div class="chrome-row">
                 <a href="{{ route('posts.index') }}" class="brand"><span class="mark">つ</span>つぶやき投稿アプリ</a>
             </div>
-            <div class="page-title">ポストを編集</div>
+            <div class="page-title">{{ $post->exists ? 'ポストを編集' : 'ポストを書く' }}</div>
         </header>
 
         <main>
-            <form class="editor" action="{{ route('posts.update', $post) }}" method="POST">
+            {{-- 新規投稿（posts.create）と編集（posts.edit）で兼用。保存済みのポストかどうか（$post->exists）で出し分ける --}}
+            <form class="editor" action="{{ $post->exists ? route('posts.update', $post) : route('posts.store') }}" method="POST">
                 @csrf
-                @method('PUT')
+                @if ($post->exists)
+                    @method('PUT')
+                @endif
 
                 <div class="form-group">
                     <label for="title">タイトル</label>
@@ -57,6 +60,9 @@
                 <div class="form-group">
                     <label for="category_id">トピック</label>
                     <select id="category_id" name="category_id" required>
+                        @unless ($post->exists)
+                            <option value="">選択してください</option>
+                        @endunless
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}" @selected(old('category_id', $post->category_id) == $category->id)>{{ $category->name }}</option>
                         @endforeach
@@ -69,7 +75,7 @@
                 <div class="form-group">
                     <label for="content">本文</label>
                     <textarea id="content" name="content" required>{{ old('content', $post->content) }}</textarea>
-                    @php($remaining = 140 - mb_strlen(str_replace("\r\n", "\n", old('content', $post->content))))
+                    @php($remaining = 140 - mb_strlen(str_replace("\r\n", "\n", (string) old('content', $post->content))))
                     <p id="content-counter" class="counter @if ($remaining < 0) over @endif">{{ $remaining >= 0 ? "残り {$remaining} 字" : (-$remaining).' 字オーバー' }}</p>
                     @error('content')
                         <p class="error">{{ $message }}</p>

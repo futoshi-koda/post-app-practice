@@ -18,6 +18,25 @@ class PostController extends Controller
         return view('posts.index', compact('posts'));
     }
 
+    public function create()
+    {
+        // 編集画面と兼用。保存されていない空の Post を渡すと、入力欄が空の状態で表示される
+        $post = new Post;
+        $categories = Category::orderBy('id')->get();
+
+        return view('posts.edit', compact('post', 'categories'));
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $this->validatePost($request);
+
+        // 投稿者は常にログイン中のユーザー。リクエストに user_id が混ざっていても使わない
+        $request->user()->posts()->create($validated);
+
+        return redirect()->route('posts.index');
+    }
+
     public function show(Post $post)
     {
         $post->load([
@@ -42,12 +61,7 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
 
-        $validated = $this->validateContent($request, [
-            'title' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-        ]);
-
-        $post->update($validated);
+        $post->update($this->validatePost($request));
 
         return redirect()->route('posts.index');
     }
@@ -59,5 +73,16 @@ class PostController extends Controller
         $post->delete();
 
         return redirect()->route('posts.index');
+    }
+
+    /**
+     * 新規投稿と編集で共通の入力チェック（タイトル・トピック・本文）。
+     */
+    private function validatePost(Request $request): array
+    {
+        return $this->validateContent($request, [
+            'title' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+        ]);
     }
 }
