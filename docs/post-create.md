@@ -1,3 +1,5 @@
+> この設計書は、この機能を実装した時点の記録です。このあとは更新していません。
+
 # ポスト新規投稿機能 設計
 
 Issue: [#3 ポストの新規投稿機能を追加する](https://github.com/futoshi-koda/post-app-practice/issues/3)
