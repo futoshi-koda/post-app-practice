@@ -11,9 +11,10 @@ use Illuminate\Http\Request;
 trait ValidatesContent
 {
     /**
-     * 本文をチェックし、検証済みの値を返す。本文以外の項目は $rules で足す。
+     * 本文をチェックし、検証済みの値を返す。本文以外の項目は $rules で足し、
+     * そのメッセージは $messages で足す（lang/ja は使わず、ルールごとに日本語を指定する）。
      */
-    protected function validateContent(Request $request, array $rules = []): array
+    protected function validateContent(Request $request, array $rules = [], array $messages = []): array
     {
         // ブラウザは textarea の改行を \r\n で送るため、1 改行を 1 字として数えるよう \n に揃える
         $request->merge([
@@ -22,7 +23,7 @@ trait ValidatesContent
 
         return $request->validate($rules + [
             'content' => 'required|string|max:140',
-        ], [
+        ], $messages + [
             'content.required' => '本文を入力してください。',
             'content.max' => '本文は140字以内で入力してください。',
         ]);
