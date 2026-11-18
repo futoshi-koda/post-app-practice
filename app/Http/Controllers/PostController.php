@@ -83,6 +83,12 @@ class PostController extends Controller
         return $this->validateContent($request, [
             'title' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
+        ], [
+            'title.required' => 'タイトルを入力してください。',
+            'title.string' => 'タイトルは文字で入力してください。',
+            'title.max' => 'タイトルは255字以内で入力してください。',
+            'category_id.required' => 'トピックを選択してください。',
+            'category_id.exists' => '選択したトピックは存在しません。',
         ]);
     }
 }
