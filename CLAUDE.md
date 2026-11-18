@@ -30,11 +30,41 @@ Tutorial 13〜15 の教材用の小さな投稿アプリ（Laravel 10 / PHP / My
 ## アーキテクチャ
 
 - **認証は Fortify**。ログイン・登録・ログアウトのルートは Fortify が提供し、`routes/web.php` には書かれていない。有効な機能は `config/fortify.php`（registration, resetPasswords）。ビューは `FortifyServiceProvider` で `auth.login` / `auth.register` に割り当て、ユーザー作成ロジックは `app/Actions/Fortify/CreateNewUser.php`。ログイン後の遷移先は `/posts`（`config/fortify.php` の `home` と `RouteServiceProvider::HOME`）。
-- **投稿機能**は `PostController`（index / edit / update / destroy のみ。新規作成・詳細表示はない）。ルートはすべて `auth` ミドルウェア内。
-- **認可は `PostPolicy`**（update / delete とも「投稿者本人のみ」）。`AuthServiceProvider::$policies` には登録しておらず、Laravel の自動検出に頼っている。コントローラで `$this->authorize()` を呼び、他人の投稿は 403。ビュー側でも編集・削除ボタンを本人にしか出さない。
-- **データモデル**: `User` 1—* `Post` *—1 `Category`。カテゴリは seeder で固定 3 件（お知らせ・技術メモ・雑記）を入れるだけで、管理画面はない。
+- **投稿機能**は `PostController`（index / create / store / show / edit / update / destroy）。リプライは `ReplyController`（store / destroy）。ルートはすべて `auth` ミドルウェア内。
+- **認可は `PostPolicy` と `ReplyPolicy`**。ポストは update / delete とも、リプライは delete が「投稿者本人のみ」（ポストの作者でも他人のリプライは消せない）。`AuthServiceProvider::$policies` には登録しておらず、Laravel の自動検出に頼っている。コントローラで `$this->authorize()` を呼び、他人のものは 403。ビュー側でも編集・削除ボタンを本人にしか出さない。
+- **データモデル**: `User` 1—* `Post` *—1 `Category`、`Post` 1—* `Reply` *—1 `User`。カテゴリは seeder で固定 3 件（お知らせ・技術メモ・雑記）を入れるだけで、管理画面はない。
 - ファクトリは `UserFactory` のみ。`Post` / `Category` のテストデータが必要なら作る必要がある。
 - 練習用アカウント（seeder）: `usera@example.com` / `userb@example.com`、パスワードはどちらも `password`。
+
+## アプリの前提
+
+依頼文に毎回書かなくてよいように、ここに置く。この節を正とする。コードが食い違っていたら、コードのほうを直す対象として扱い、勝手に直さず報告する。
+
+### タイムライン（`/posts`）
+
+- タイムラインの今ある動き（一覧・編集・削除）を壊さない。
+
+### 入力チェックのメッセージ
+
+- 画面に出す入力チェックのメッセージは日本語で書く。
+- 本文（必須・140 字以内）のメッセージは `ValidatesContent` に定義済み。ポストとリプライで共通なので、ここだけを直す。
+- `lang/ja` は使わない（`locale` は `en` のまま）。メッセージは `$request->validate($rules, $messages)` の第2引数で、ルールごとに個別に指定する。新しい入力チェックを足すときも同じ書き方に合わせる。
+  - 例: タイトル・トピックは `PostController::validatePost` から `validateContent` の `$messages` 引数に渡している。
+- Fortify の Actions（新規登録・パスワード変更・リセット・プロフィール更新）とログイン失敗のメッセージは、まだ英語のまま。
+
+## 作業の進め方
+
+### テスト
+
+- 機能を足す・直すときは、テストも書く。
+- `./vendor/bin/sail test` で全体を回し、落ちたら通るまで直す。最後に結果（通った件数・直した内容）を報告する。
+- 通らないまま終わるときは、通らないテストとその理由を、そのまま報告する。
+
+### PR
+
+- PR の本文に、次の 2 つを書く。
+  - テスト結果（`sail test` の結果）。
+  - 受け入れ条件の突き合わせ（条件ごとに、満たしたか・どのテストや画面で確かめたか）。
 
 ## アプリ以外のフォルダ
 
