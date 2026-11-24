@@ -18,6 +18,15 @@ class Post extends Model
         'content',
     ];
 
+    /**
+     * 一度でも編集されたか。列は持たず、更新日時が作成日時より後かどうかで判断する。
+     * （リプライの追加ではポストの updated_at は動かない）
+     */
+    public function isEdited(): bool
+    {
+        return $this->updated_at->gt($this->created_at);
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
