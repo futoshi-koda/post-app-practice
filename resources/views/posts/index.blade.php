@@ -43,6 +43,9 @@
                             <div class="post-head">
                                 <span class="name">{{ $post->user->name }}</span>
                                 <a href="{{ route('posts.show', $post) }}" class="time">{{ $post->created_at->format('n月j日 H:i') }}</a>
+                                @if($post->isEdited())
+                                    <span class="edited">編集済み</span>
+                                @endif
                                 <span class="topic" style="background: {{ $tBg }}; color: {{ $tFg }};">{{ $post->category->name }}</span>
                             </div>
                             <p class="post-title">{{ $post->title }}</p>
