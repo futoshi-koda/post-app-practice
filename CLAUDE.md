@@ -32,7 +32,7 @@ Tutorial 13〜15 の教材用の小さな投稿アプリ（Laravel 10 / PHP / My
 - **認証は Fortify**。ログイン・登録・ログアウトのルートは Fortify が提供し、`routes/web.php` には書かれていない。有効な機能は `config/fortify.php`（registration, resetPasswords）。ビューは `FortifyServiceProvider` で `auth.login` / `auth.register` に割り当て、ユーザー作成ロジックは `app/Actions/Fortify/CreateNewUser.php`。ログイン後の遷移先は `/posts`（`config/fortify.php` の `home` と `RouteServiceProvider::HOME`）。
 - **投稿機能**は `PostController`（index / create / store / show / edit / update / destroy）。リプライは `ReplyController`（store / destroy）。ルートはすべて `auth` ミドルウェア内。
 - **認可は `PostPolicy` と `ReplyPolicy`**。ポストは update / delete とも、リプライは delete が「投稿者本人のみ」（ポストの作者でも他人のリプライは消せない）。`AuthServiceProvider::$policies` には登録しておらず、Laravel の自動検出に頼っている。コントローラで `$this->authorize()` を呼び、他人のものは 403。ビュー側でも編集・削除ボタンを本人にしか出さない。
-- **データモデル**: `User` 1—* `Post` *—1 `Category`、`Post` 1—* `Reply` *—1 `User`。カテゴリは seeder で固定 3 件（お知らせ・技術メモ・雑記）を入れるだけで、管理画面はない。
+- **データモデル**: `User` 1—* `Post` *—1 `Category`、`Post` 1—* `Reply` *—1 `User`。いいねは `likes` テーブル（`user_id` + `post_id` で一意）で、`Post::likes()` が `User` との多対多。タイムラインのボタンは `POST /posts/{post}/like` と `/unlike`（取り消しを DELETE にしないのは、既存テストが `value="DELETE"` の有無で削除ボタンを見分けているため）。カテゴリは seeder で固定 3 件（お知らせ・技術メモ・雑記）を入れるだけで、管理画面はない。
 - ファクトリは `UserFactory` のみ。`Post` / `Category` のテストデータが必要なら作る必要がある。
 - 練習用アカウント（seeder）: `usera@example.com` / `userb@example.com`、パスワードはどちらも `password`。
 

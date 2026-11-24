@@ -50,6 +50,15 @@
                             </div>
                             <p class="post-title">{{ $post->title }}</p>
                             <a href="{{ route('posts.show', $post) }}" class="post-text-link"><p class="post-text">{{ $post->content }}</p></a>
+                            <div class="like-row">
+                                <form action="{{ $post->liked_by_me ? route('posts.unlike', $post) : route('posts.like', $post) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="like-btn{{ $post->liked_by_me ? ' liked' : '' }}" aria-pressed="{{ $post->liked_by_me ? 'true' : 'false' }}" aria-label="{{ $post->liked_by_me ? 'いいねを取り消す' : 'いいねする' }}">
+                                        <span class="like-icon" aria-hidden="true">{{ $post->liked_by_me ? '♥' : '♡' }}</span>
+                                        <span class="like-count">{{ $post->likes_count }}</span>
+                                    </button>
+                                </form>
+                            </div>
                             @canany(['update', 'delete'], $post)
                                 <div class="post-actions">
                                     @can('update', $post)

@@ -13,8 +13,14 @@ class PostController extends Controller
 
     public function index()
     {
-        // 投稿者とトピックをまとめて読み込み、新しい順にタイムラインへ一覧表示する
-        $posts = Post::with(['user', 'category'])->latest()->get();
+        // 投稿者とトピックをまとめて読み込み、新しい順にタイムラインへ一覧表示する。
+        // いいねの数（likes_count）と、ログイン中のユーザーが押しているか（liked_by_me）も一緒に取る
+        $userId = auth()->id();
+        $posts = Post::with(['user', 'category'])
+            ->withCount('likes')
+            ->withExists(['likes as liked_by_me' => fn ($query) => $query->where('users.id', $userId)])
+            ->latest()
+            ->get();
 
         return view('posts.index', compact('posts'));
     }
