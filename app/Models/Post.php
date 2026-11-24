@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Post extends Model
@@ -40,5 +41,14 @@ class Post extends Model
     public function replies(): HasMany
     {
         return $this->hasMany(Reply::class);
+    }
+
+    /**
+     * このポストにいいねしたユーザー（中間テーブルは likes）。
+     * 付け外ししてもポストの updated_at は動かないので「編集済み」にはならない。
+     */
+    public function likes(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'likes')->withTimestamps();
     }
 }

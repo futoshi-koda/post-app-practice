@@ -35,4 +35,10 @@
     .post-actions a:hover { color: #0F1419; text-decoration: underline; text-underline-offset: 3px; }
     .post-actions button:hover { color: #D6402C; text-decoration: underline; text-underline-offset: 3px; }
     .post-actions a:focus-visible, .post-actions button:focus-visible { outline: 2px solid #E8792B; outline-offset: 2px; border-radius: 4px; }
+    .like-row { margin-top: 0.5rem; }
+    .like-btn { display: inline-flex; align-items: center; gap: 0.3rem; background: none; border: none; padding: 0.1rem 0.2rem; color: #5B6570; font-size: 0.82rem; font-weight: 600; cursor: pointer; font-family: inherit; font-variant-numeric: tabular-nums; }
+    .like-btn:hover { color: #D6402C; }
+    .like-btn.liked { color: #D6402C; font-weight: 700; }
+    .like-btn:focus-visible { outline: 2px solid #E8792B; outline-offset: 2px; border-radius: 4px; }
+    .like-icon { font-size: 1rem; line-height: 1; }
     .empty { color: #5B6570; text-align: center; padding: 3.5rem 1rem; }
