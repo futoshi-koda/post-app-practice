@@ -86,13 +86,13 @@
                 </div>
 
                 {{-- タグは任意（0 個以上）。エラーで戻ったときは選んでいたものを、編集画面では今付いているものを選んだ状態にする --}}
-                @php($checkedTagIds = array_map('intval', session()->hasOldInput() ? (array) old('tag_ids', []) : $post->tags->pluck('id')->all()))
+                @php($checkedTagIds = array_map('intval', session()->hasOldInput() ? (array) old('tag_ids', []) : ($post->exists ? $post->tags->pluck('id')->all() : [])))
                 <div class="form-group">
                     <label>タグ</label>
                     <div class="tag-options">
                         @foreach ($tags as $tag)
                             <label class="tag-option">
-                                <input type="checkbox" name="tag_ids[]" value="{{ $tag->id }}" @checked(in_array($tag->id, $checkedTagIds, true))>
+                                <input type="checkbox" name="tag_ids[]" value="{{ $tag->id }}" @checked(in_array((int) $tag->id, $checkedTagIds, true))>
                                 #{{ $tag->name }}
                             </label>
                         @endforeach

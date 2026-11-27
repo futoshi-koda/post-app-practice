@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -15,10 +16,18 @@ class PostController extends Controller
 
     public function index(Request $request)
     {
-        // ?tag={タグの id} があれば、そのタグが付いたポストだけに絞る（存在しないタグは 404）。
-        // 空（?tag=）は絞り込みなしと同じ
-        $selectedTag = $request->filled('tag') ? Tag::findOrFail($request->query('tag')) : null;
         $tags = Tag::orderBy('id')->get();
+
+        // ?tag={タグの id} があれば、そのタグが付いたポストだけに絞る。空（?tag=）は絞り込みなしと同じ。
+        // 存在しないタグのほか、配列（?tag[]=1）や数字だけでない値（?tag=1abc）も 404 にする
+        // （DB に渡すと '1abc' が 1 として扱われ、タグ 1 の絞り込みになってしまう）
+        $selectedTag = null;
+        if ($request->filled('tag')) {
+            $tagId = $request->query('tag');
+            abort_unless(is_string($tagId) && ctype_digit($tagId), 404);
+
+            $selectedTag = $tags->firstWhere('id', (int) $tagId) ?? abort(404);
+        }
 
         // 投稿者・トピック・タグをまとめて読み込み、新しい順にタイムラインへ一覧表示する。
         // いいねの数（likes_count）と、ログイン中のユーザーが押しているか（liked_by_me）も一緒に取る
@@ -47,9 +56,12 @@ class PostController extends Controller
     {
         [$validated, $tagIds] = $this->validatedPostAndTagIds($request);
 
+        // ポストの保存とタグの付与は、片方だけ成功した状態を残さないよう一緒に確定する。
         // 投稿者は常にログイン中のユーザー。リクエストに user_id が混ざっていても使わない
-        $post = $request->user()->posts()->create($validated);
-        $post->tags()->sync($tagIds);
+        DB::transaction(function () use ($request, $validated, $tagIds) {
+            $post = $request->user()->posts()->create($validated);
+            $post->tags()->sync($tagIds);
+        });
 
         return redirect()->route('posts.index');
     }
@@ -81,9 +93,12 @@ class PostController extends Controller
 
         [$validated, $tagIds] = $this->validatedPostAndTagIds($request);
 
-        // タグだけの付け替えでは posts の列が変わらないので、updated_at は動かない（「編集済み」にならない）
-        $post->update($validated);
-        $post->tags()->sync($tagIds);
+        // タグだけの付け替えでは posts の列が変わらないので、updated_at は動かない（「編集済み」にならない）。
+        // ポストの更新とタグの付け替えは、一緒に確定する
+        DB::transaction(function () use ($post, $validated, $tagIds) {
+            $post->update($validated);
+            $post->tags()->sync($tagIds);
+        });
 
         return redirect()->route('posts.index');
     }

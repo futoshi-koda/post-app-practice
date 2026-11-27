@@ -147,6 +147,17 @@ class PostTagTest extends TestCase
 
     // ---- 編集・付け替え ----
 
+    public function test_作成画面では編集中のポストがないのでタグを調べにいかない(): void
+    {
+        \DB::enableQueryLog();
+
+        $this->actingAs($this->user)->get(route('posts.create'))->assertOk();
+
+        // 保存されていない Post のタグを読む「post_tag where post_id is null」が走らない
+        $queries = collect(\DB::getQueryLog())->pluck('query')->implode("\n");
+        $this->assertStringNotContainsString('post_tag', $queries);
+    }
+
     public function test_編集画面で今付いているタグにだけチェックが入っている(): void
     {
         $post = $this->existingPost($this->user, '元のタイトル', [$this->learn, $this->question]);
@@ -298,6 +309,36 @@ class PostTagTest extends TestCase
         $html = $this->get(route('posts.edit', $post))->assertOk()->getContent();
 
         $this->assertDoesNotMatchRegularExpression('/value="'.$this->learn->id.'"\s+checked/', $html);
+    }
+
+    // ---- 保存の一貫性 ----
+
+    public function test_作成の途中で失敗したらポストもタグも残らない(): void
+    {
+        // ポストを保存した直後（タグを付ける前）に失敗させる
+        Post::created(fn () => throw new \RuntimeException('保存の途中で失敗'));
+
+        $this->actingAs($this->user)
+            ->post(route('posts.store'), $this->payload(['tag_ids' => [$this->learn->id]]))
+            ->assertStatus(500);
+
+        $this->assertDatabaseCount('posts', 0);
+        $this->assertDatabaseCount('post_tag', 0);
+    }
+
+    public function test_編集の途中で失敗したらタイトルもタグも元のまま(): void
+    {
+        $post = $this->existingPost($this->user, '元のタイトル', [$this->learn]);
+
+        // ポストを更新した直後（タグを付け替える前）に失敗させる
+        Post::updated(fn () => throw new \RuntimeException('更新の途中で失敗'));
+
+        $this->actingAs($this->user)
+            ->put(route('posts.update', $post), $this->payload(['tag_ids' => [$this->stumble->id]]))
+            ->assertStatus(500);
+
+        $this->assertSame('元のタイトル', $post->fresh()->title);
+        $this->assertSame([$this->learn->id], $this->tagIdsOf($post));
     }
 
     // ---- 認可 ----
@@ -455,6 +496,16 @@ class PostTagTest extends TestCase
         $this->actingAs($this->user)
             ->get(route('posts.index', ['tag' => 'abc']))
             ->assertNotFound();
+    }
+
+    public function test_tagが配列や数字だけでない値のときも404(): void
+    {
+        $this->existingPost($this->user, '学びのポスト', [$this->learn]);
+
+        // ?tag[]=1 は 500 にならず、?tag=1abc / 1.9 は DB の曖昧な比較でタグ 1 に化けない
+        foreach (['/posts?tag[]='.$this->learn->id, '/posts?tag[a]='.$this->learn->id, '/posts?tag='.$this->learn->id.'abc', '/posts?tag='.$this->learn->id.'.9', '/posts?tag=0', '/posts?tag=-'.$this->learn->id] as $url) {
+            $this->actingAs($this->user)->get($url)->assertNotFound();
+        }
     }
 
     public function test_tagが空のときは絞り込みなしと同じ(): void
