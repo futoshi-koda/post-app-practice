@@ -33,6 +33,7 @@ Tutorial 13〜15 の教材用の小さな投稿アプリ（Laravel 10 / PHP / My
 - **投稿機能**は `PostController`（index / create / store / show / edit / update / destroy）。リプライは `ReplyController`（store / destroy）。ルートはすべて `auth` ミドルウェア内。
 - **認可は `PostPolicy` と `ReplyPolicy`**。ポストは update / delete とも、リプライは delete が「投稿者本人のみ」（ポストの作者でも他人のリプライは消せない）。`AuthServiceProvider::$policies` には登録しておらず、Laravel の自動検出に頼っている。コントローラで `$this->authorize()` を呼び、他人のものは 403。ビュー側でも編集・削除ボタンを本人にしか出さない。
 - **データモデル**: `User` 1—* `Post` *—1 `Category`、`Post` 1—* `Reply` *—1 `User`。いいねは `likes` テーブル（`user_id` + `post_id` で一意）で、`Post::likes()` が `User` との多対多。タイムラインのボタンは `POST /posts/{post}/like` と `/unlike`（取り消しを DELETE にしないのは、既存テストが `value="DELETE"` の有無で削除ボタンを見分けているため）。カテゴリは seeder で固定 3 件（お知らせ・技術メモ・雑記）を入れるだけで、管理画面はない。
+- **タグ**は `Post` *—* `Tag` の多対多（中間テーブル `post_tag`、`Post::tags()` / `Tag::posts()`）。トピックとは別物で、ポストに 0 個以上付けられる。seeder で固定 5 件（学び・つまずき・質問・発見・おすすめ。DB には `#` なしで保存、画面では `#学び`）を入れるだけで、タグを作る・直す・消す画面はない。付け替えは作成・編集画面のチェックボックス（`tag_ids[]`、`store` / `update` で `sync`）で、タグだけ変えても `updated_at` は動かない（「編集済み」にならない）。タイムラインは `GET /posts?tag={id}` で 1 つに絞り込める（存在しない・数字でない・配列の指定は 404）。設計は `docs/post-tag.md`。
 - ファクトリは `UserFactory` のみ。`Post` / `Category` のテストデータが必要なら作る必要がある。
 - 練習用アカウント（seeder）: `usera@example.com` / `userb@example.com`、パスワードはどちらも `password`。
 

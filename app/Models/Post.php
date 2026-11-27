@@ -51,4 +51,13 @@ class Post extends Model
     {
         return $this->belongsToMany(User::class, 'likes')->withTimestamps();
     }
+
+    /**
+     * このポストに付いたタグ（中間テーブルは post_tag）。
+     * 付け替えてもポストの updated_at は動かないので「編集済み」にはならない。
+     */
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -16,6 +17,10 @@ class DatabaseSeeder extends Seeder
         $notice = Category::create(['name' => 'お知らせ']);
         $tech = Category::create(['name' => '技術メモ']);
         $etc = Category::create(['name' => '雑記']);
+
+        // タグ（ポストの性格。トピックとは別。名前は「#」なしで保存する）
+        $tags = collect(['学び', 'つまずき', '質問', '発見', 'おすすめ'])
+            ->mapWithKeys(fn ($name) => [$name => Tag::create(['name' => $name])]);
 
         // 検証用アカウント（メールとパスワードは変更しない）
         $haruka = User::create([
@@ -65,8 +70,25 @@ class DatabaseSeeder extends Seeder
             [$sota, $etc, '休憩宣言', '2時間集中したのでアイス食べます。溶ける前に食べ切るまでが休憩です。', 1],
         ];
 
-        foreach ($posts as [$user, $category, $title, $content, $hoursAgo]) {
-            Post::create([
+        // タグを付けるポスト（$posts の何番目か => タグ名）。半分ほどに付け、タグなしのポストも残す。
+        // 5 つのタグがすべてどこかのポストに付くようにしている
+        $postTags = [
+            1 => ['学び'],
+            3 => ['つまずき', '学び'],
+            5 => ['質問'],
+            6 => ['つまずき'],
+            9 => ['発見', '学び'],
+            10 => ['おすすめ'],
+            11 => ['発見'],
+            13 => ['学び', 'おすすめ'],
+            15 => ['おすすめ'],
+            19 => ['学び'],
+            21 => ['質問'],
+            22 => ['発見', 'おすすめ'],
+        ];
+
+        foreach ($posts as $index => [$user, $category, $title, $content, $hoursAgo]) {
+            $post = Post::create([
                 'user_id' => $user->id,
                 'category_id' => $category->id,
                 'title' => $title,
@@ -74,6 +96,10 @@ class DatabaseSeeder extends Seeder
                 'created_at' => now()->subHours($hoursAgo),
                 'updated_at' => now()->subHours($hoursAgo),
             ]);
+
+            $post->tags()->attach(
+                collect($postTags[$index] ?? [])->map(fn ($name) => $tags[$name]->id)->all()
+            );
         }
     }
 }
