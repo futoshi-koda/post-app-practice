@@ -41,4 +41,12 @@
     .like-btn.liked { color: #D6402C; font-weight: 700; }
     .like-btn:focus-visible { outline: 2px solid #E8792B; outline-offset: 2px; border-radius: 4px; }
     .like-icon { font-size: 1rem; line-height: 1; }
+    .tag-filter { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0.7rem 1rem; border-bottom: 1px solid #EFF1F4; }
+    .tag-chip { border: 1px solid #D3D9DE; border-radius: 999px; padding: 0.22rem 0.8rem; font-size: 0.8rem; font-weight: 700; color: #5B6570; background: #FFFFFF; }
+    .tag-chip:hover { background: #F7F8F9; color: #0F1419; }
+    .tag-chip.active { background: #0F1419; border-color: #0F1419; color: #FFFFFF; }
+    .tag-chip:focus-visible, .post-tag:focus-visible { outline: 2px solid #E8792B; outline-offset: 2px; }
+    .post-tags { display: flex; flex-wrap: wrap; gap: 0.2rem 0.7rem; margin-top: 0.4rem; }
+    .post-tag { color: #1D6FD1; font-size: 0.85rem; font-weight: 600; }
+    .post-tag:hover { text-decoration: underline; text-underline-offset: 3px; }
     .empty { color: #5B6570; text-align: center; padding: 3.5rem 1rem; }

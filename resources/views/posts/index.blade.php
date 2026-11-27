@@ -28,8 +28,20 @@
         </header>
 
         <main class="feed">
+            {{-- タグでの絞り込み。「すべて」+ 用意されたタグ。いま選んでいるものは見た目を変える --}}
+            <nav class="tag-filter" aria-label="タグで絞り込む">
+                <a href="{{ route('posts.index') }}" class="tag-chip{{ $selectedTag ? '' : ' active' }}" @unless($selectedTag) aria-current="true" @endunless>すべて</a>
+                @foreach ($tags as $tag)
+                    <a href="{{ route('posts.index', ['tag' => $tag->id]) }}" class="tag-chip{{ $selectedTag?->id === $tag->id ? ' active' : '' }}" @if($selectedTag?->id === $tag->id) aria-current="true" @endif>#{{ $tag->name }}</a>
+                @endforeach
+            </nav>
+
             @if($posts->isEmpty())
-                <p class="empty">まだポストがありません。</p>
+                @if($selectedTag)
+                    <p class="empty">該当するポストがありません。</p>
+                @else
+                    <p class="empty">まだポストがありません。</p>
+                @endif
             @else
                 @foreach ($posts as $post)
                     @php
@@ -50,6 +62,13 @@
                             </div>
                             <p class="post-title">{{ $post->title }}</p>
                             <a href="{{ route('posts.show', $post) }}" class="post-text-link"><p class="post-text">{{ $post->content }}</p></a>
+                            @if($post->tags->isNotEmpty())
+                                <div class="post-tags">
+                                    @foreach ($post->tags as $tag)
+                                        <a href="{{ route('posts.index', ['tag' => $tag->id]) }}" class="post-tag">#{{ $tag->name }}</a>
+                                    @endforeach
+                                </div>
+                            @endif
                             <div class="like-row">
                                 <form action="{{ $post->liked_by_me ? route('posts.unlike', $post) : route('posts.like', $post) }}" method="POST">
                                     @csrf

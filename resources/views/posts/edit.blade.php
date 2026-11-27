@@ -28,6 +28,9 @@
         .btn-secondary:hover { background: #F7F8F9; }
         .btn:focus-visible { outline: 2px solid #E8792B; outline-offset: 2px; }
         .error { color: #D6402C; font-size: 0.83rem; margin-top: 0.3rem; }
+        .tag-options { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; }
+        .tag-option { display: inline-flex; align-items: center; gap: 0.35rem; margin-bottom: 0; color: #0F1419; font-size: 0.9rem; font-weight: 600; cursor: pointer; }
+        .tag-option input { width: 1rem; height: 1rem; }
         .counter { color: #5B6570; font-size: 0.8rem; text-align: right; margin-top: 0.3rem; }
         .counter.over { color: #D6402C; font-weight: 700; }
     </style>
@@ -78,6 +81,26 @@
                     @php($remaining = 140 - mb_strlen(str_replace("\r\n", "\n", (string) old('content', $post->content))))
                     <p id="content-counter" class="counter @if ($remaining < 0) over @endif">{{ $remaining >= 0 ? "残り {$remaining} 字" : (-$remaining).' 字オーバー' }}</p>
                     @error('content')
+                        <p class="error">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                {{-- タグは任意（0 個以上）。エラーで戻ったときは選んでいたものを、編集画面では今付いているものを選んだ状態にする --}}
+                @php($checkedTagIds = array_map('intval', session()->hasOldInput() ? (array) old('tag_ids', []) : $post->tags->pluck('id')->all()))
+                <div class="form-group">
+                    <label>タグ</label>
+                    <div class="tag-options">
+                        @foreach ($tags as $tag)
+                            <label class="tag-option">
+                                <input type="checkbox" name="tag_ids[]" value="{{ $tag->id }}" @checked(in_array($tag->id, $checkedTagIds, true))>
+                                #{{ $tag->name }}
+                            </label>
+                        @endforeach
+                    </div>
+                    @error('tag_ids')
+                        <p class="error">{{ $message }}</p>
+                    @enderror
+                    @error('tag_ids.*')
                         <p class="error">{{ $message }}</p>
                     @enderror
                 </div>
